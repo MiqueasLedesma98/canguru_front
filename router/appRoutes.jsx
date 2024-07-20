@@ -1,43 +1,34 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { APP_ROUTES } from "./routes";
 import { useAuthStore } from "../stores";
-import { screen_names } from "./screen_names";
-
-const publicRoutes = [screen_names.LOGIN, screen_names.REGISTER];
+import Routes from "./routes";
 
 const Stack = createNativeStackNavigator();
 
-const AppRoutes = () => {
-  const { auth } = useAuthStore();
+const screens = Object.entries(Routes);
 
-  const isAuthenticated = false;
+const AppRoutes = () => {
+  const authState = useAuthStore((state) => state.auth);
 
   return (
     <Stack.Navigator>
-      {Object.entries(APP_ROUTES).map(([name, { Component, auth }]) => {
-        if (isAuthenticated && publicRoutes.includes(name)) {
-          return null;
-        }
-
-        return (
+      {screens
+        .filter(([_name, { auth }]) => (authState ? auth : !auth))
+        .map(([name, { Component, auth }]) => (
           <Stack.Screen
             key={name}
             name={name}
+            options={{ headerShown: false }}
             component={Component}
-            options={{
-              headerShown: false,
-            }}
             listeners={({ navigation }) => ({
               focus: () => {
-                if (auth && !isAuthenticated) {
+                if (auth && !authState) {
                   navigation.navigate(screen_names.LOGIN);
                 }
               },
             })}
           />
-        );
-      })}
+        ))}
     </Stack.Navigator>
   );
 };

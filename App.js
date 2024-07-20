@@ -1,6 +1,6 @@
 import { PaperProvider, Text } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
-import AppRoutes from "./router/appRoutes";
+import AppRoutes from "./router/AppRoutes";
 import { View } from "react-native";
 import { GLOBAL } from "./global_styles";
 import { navigationRef } from "./helpers";

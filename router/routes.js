@@ -1,6 +1,6 @@
 import { Login, Register, Home } from "../screens";
 
-const APP_ROUTES = {
+const Routes = {
   Login: {
     Component: Login,
     auth: false,
@@ -15,4 +15,4 @@ const APP_ROUTES = {
   },
 };
 
-export { APP_ROUTES };
+export default Routes;

@@ -1,11 +1,20 @@
-import { Image, StyleSheet, View, Dimensions, Pressable } from "react-native";
-import React, { useCallback } from "react";
+import {
+  Image,
+  StyleSheet,
+  View,
+  Dimensions,
+  Pressable,
+  ScrollView,
+} from "react-native";
+import React, { useState } from "react";
 import { GLOBAL, FONT, COLOR } from "../global_styles";
 import { Button, Text, TextInput } from "react-native-paper";
 import { useForm } from "../hooks";
 import { screen_names } from "../router/screen_names";
+import useAuthStore from "../stores/useAuthStore";
+import { LoadingModal } from "../components";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("screen");
 
 const validations = {
   email: {
@@ -19,13 +28,40 @@ const validations = {
 };
 
 const Login = ({ navigation }) => {
+  const [loading, setLoading] = useState(false);
   const { form, handleChange, errors } = useForm({
     validations,
     initialValues: { email: "", password: "" },
   });
 
+  const loginStore = useAuthStore((state) => state.login);
+
+  const handleSubmit = async () => {
+    const isReady =
+      Object.keys(errors).length === 0 && Object.values(form).every((e) => e);
+
+    try {
+      setLoading(true);
+      if (!isReady) return;
+      else {
+        await loginStore(form);
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <View style={[GLOBAL.screenContainer, GLOBAL.center, style.screen]}>
+    <ScrollView
+      keyboardShouldPersistTaps={"never"}
+      contentContainerStyle={[
+        GLOBAL.screenContainer,
+        GLOBAL.center,
+        style.screen,
+      ]}
+    >
       <View style={GLOBAL.space} />
       <View style={[style.logo_container, GLOBAL.center]}>
         <Image source={require("../assets/Logo.png")} style={style.logo} />
@@ -57,7 +93,7 @@ const Login = ({ navigation }) => {
         <Button
           mode="contained"
           style={style.submit_button}
-          onPress={() => navigation.navigate(screen_names.HOME)}
+          onPress={handleSubmit}
         >
           <Text style={style.submit_text}>Iniciar Sesión</Text>
         </Button>
@@ -77,7 +113,8 @@ const Login = ({ navigation }) => {
         source={require("../assets/dog_login.png")}
         style={style.dog_footer}
       />
-    </View>
+      <LoadingModal loading={loading} />
+    </ScrollView>
   );
 };
 
@@ -85,6 +122,7 @@ const style = StyleSheet.create({
   screen: {
     justifyContent: "space-between",
     paddingBottom: 0,
+    minHeight: height,
   },
   logo_container: {
     height: "auto",
