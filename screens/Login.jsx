@@ -6,15 +6,16 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GLOBAL, FONT, COLOR } from "../global_styles";
 import { Button, Text, TextInput } from "react-native-paper";
 import { useForm } from "../hooks";
 import { screen_names } from "../router/screen_names";
 import useAuthStore from "../stores/useAuthStore";
 import { LoadingModal } from "../components";
+import { api } from "../axios";
 
-const { width, height } = Dimensions.get("screen");
+const { width, height } = Dimensions.get("window");
 
 const validations = {
   email: {
@@ -35,6 +36,7 @@ const Login = ({ navigation }) => {
   });
 
   const loginStore = useAuthStore((state) => state.login);
+  const restoreSession = useAuthStore((state) => state.restoreSession);
 
   const handleSubmit = async () => {
     const isReady =
@@ -52,6 +54,10 @@ const Login = ({ navigation }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    api.loadCredentials(restoreSession);
+  }, []);
 
   return (
     <ScrollView

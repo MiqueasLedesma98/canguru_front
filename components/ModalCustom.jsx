@@ -1,14 +1,31 @@
-import { View, Text } from "react-native";
-import React from "react";
+import React, { useCallback } from "react";
+import { Modal, Portal } from "react-native-paper";
+import { GLOBAL } from "../global_styles";
 
-const ModalCustom = ({ children, component }) => {
-  const Component = component;
+const ModalCustom = ({
+  children,
+  component: Component,
+  open,
+  dismissable,
+  onDismiss,
+}) => {
+  const renderComponent = useCallback(() => <Component />, [Component]);
 
   return (
-    <View>
-      <Text>ModalCustom</Text>
-    </View>
+    <>
+      {children}
+      <Portal>
+        <Modal
+          visible={open}
+          dismissable={dismissable}
+          onDismiss={onDismiss}
+          contentContainerStyle={[GLOBAL.screenContainer, GLOBAL.center]}
+        >
+          {renderComponent()}
+        </Modal>
+      </Portal>
+    </>
   );
 };
 
-export default ModalCustom;
+export default React.memo(ModalCustom);
