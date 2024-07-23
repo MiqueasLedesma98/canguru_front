@@ -6,14 +6,14 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { GLOBAL, FONT, COLOR } from "../global_styles";
 import { Button, Text, TextInput } from "react-native-paper";
 import { useForm } from "../hooks";
-import { screen_names } from "../router/screen_names";
 import useAuthStore from "../stores/useAuthStore";
 import { LoadingModal } from "../components";
-import { api } from "../axios";
+import paw from "../assets/paw.png";
+import screensNames from "../router/screensNames";
 
 const { width, height } = Dimensions.get("window");
 
@@ -36,7 +36,6 @@ const Login = ({ navigation }) => {
   });
 
   const loginStore = useAuthStore((state) => state.login);
-  const restoreSession = useAuthStore((state) => state.restoreSession);
 
   const handleSubmit = async () => {
     const isReady =
@@ -54,10 +53,6 @@ const Login = ({ navigation }) => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    api.loadCredentials(restoreSession);
-  }, []);
 
   return (
     <ScrollView
@@ -104,10 +99,14 @@ const Login = ({ navigation }) => {
           <Text style={style.submit_text}>Iniciar Sesión</Text>
         </Button>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Pressable>
-            <Text style={style.pressable_text}>Olvido su contraseña</Text>
+          <Pressable
+            onPress={() => navigation.navigate(screensNames.RECOVER_PASS)}
+          >
+            <Text style={style.pressable_text}>Olvidé mi contraseña</Text>
           </Pressable>
-          <Pressable onPress={() => navigation.navigate(screen_names.REGISTER)}>
+          <Pressable
+            onPress={() => navigation.navigate(screensNames.REGISTER)}
+          >
             <Text style={style.pressable_text}>
               No tienes cuenta con nosotros? Regístrate!
             </Text>
@@ -120,6 +119,7 @@ const Login = ({ navigation }) => {
         style={style.dog_footer}
       />
       <LoadingModal loading={loading} />
+      <Image source={paw} style={style.backgroundImg} />
     </ScrollView>
   );
 };
@@ -149,7 +149,7 @@ const style = StyleSheet.create({
   },
   form: {
     flexDirection: "column",
-    gap: 10,
+    gap: 15,
     width: "90%",
   },
   submit_text: {
@@ -161,6 +161,14 @@ const style = StyleSheet.create({
   pressable_text: {
     fontSize: 12,
     fontFamily: "Neucha",
+  },
+  backgroundImg: {
+    position: "absolute",
+    top: height * 0.3,
+    left: width * 0.4,
+    width: 300,
+    height: 300,
+    zIndex: -1,
   },
 });
 

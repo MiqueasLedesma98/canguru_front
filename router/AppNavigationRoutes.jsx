@@ -1,24 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useAuthStore } from "../stores";
-import Routes from "./routes";
+import { StackRoutes } from "./routes";
+import { api } from "../axios";
 
 const Stack = createNativeStackNavigator();
 
-const screens = Object.entries(Routes);
+const screens = Object.values(StackRoutes);
 
 const AppRoutes = () => {
   const authState = useAuthStore((state) => state.auth);
+  const restoreSession = useAuthStore((state) => state.restoreSession);
+
+  useEffect(() => {
+    api.loadCredentials(restoreSession);
+  }, []);
 
   return (
     <Stack.Navigator>
       {screens
-        .filter(([_name, { auth }]) => (authState ? auth : !auth))
-        .map(([name, { Component, auth }]) => (
+        .filter(({ auth }) => (authState ? auth : !auth))
+        .map(({ Component, auth, name, header }) => (
           <Stack.Screen
             key={name}
             name={name}
-            options={{ headerShown: false }}
+            options={{ headerShown: header }}
             component={Component}
             listeners={({ navigation }) => ({
               focus: () => {

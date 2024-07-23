@@ -12,21 +12,20 @@ const getUser = async () => {
   return JSON.parse(userInJSON);
 };
 class ApiQuery {
-  constructor() {
-    this.baseURL = apiUrl;
+  constructor(url) {
+    this.baseURL = url;
     this.axios = axios;
-
-    // TODO: Revisar como hacer para poder mostrar el error de mi response para los errors
-    // this.axios.interceptors.
   }
 
   async POST(url, body = {}) {
     try {
+      const token = await getToken();
+
       const { data } = await this.axios.post(this.baseURL + url, body);
       return data;
     } catch (error) {
       console.log(error);
-      Alert.alert(error.message);
+      Alert.alert(error.response.data.msg ?? error.message);
       return {};
     }
   }
@@ -34,11 +33,10 @@ class ApiQuery {
   async GET(url) {
     try {
       const { data } = await this.axios.get(this.baseURL + url);
-
       return data;
     } catch (error) {
       console.log(error);
-      Alert.alert(error.message);
+      Alert.alert(error.response.data.msg ?? error.message);
       return {};
     }
   }
@@ -48,8 +46,8 @@ class ApiQuery {
       const { data } = await this.axios.put(this.baseURL + url, body);
       return data;
     } catch (error) {
-      console.log(error);
-      Alert.alert(error.message);
+      console.log({ error: error.response, data: error.response.data });
+      Alert.alert(error.response.data.msg ?? error.message);
       return {};
     }
   }
@@ -57,11 +55,10 @@ class ApiQuery {
   async DELETE(url, body) {
     try {
       const { data } = await this.axios.get(this.baseURL + url, body);
-
       return data;
     } catch (error) {
       console.log(error);
-      Alert.alert(error.message);
+      Alert.alert(error.response.data.msg ?? error.message);
       return {};
     }
   }
@@ -91,6 +88,6 @@ class ApiQuery {
   }
 }
 
-const api = new ApiQuery();
+const api = new ApiQuery(apiUrl);
 
 export { api };

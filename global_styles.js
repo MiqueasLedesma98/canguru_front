@@ -11,6 +11,7 @@ const COLOR = {
   yellow: "#F3CD03",
   bgWarning: "#FEEBDD",
   textWarning: "#FEEBDD",
+  gray: "#333",
 };
 
 const FONT = {
@@ -39,6 +40,9 @@ const GLOBAL = StyleSheet.create({
   space: {
     flex: 1,
     flexGrow: 1,
+  },
+  removePadding: {
+    padding: 0,
   },
 });
 

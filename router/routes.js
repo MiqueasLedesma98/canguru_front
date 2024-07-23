@@ -1,18 +1,54 @@
-import { Login, Register, Home } from "../screens";
+import {
+  Login,
+  Register,
+  Home,
+  RegisterSuccess,
+  RecoverPassword,
+} from "../screens";
 
-const Routes = {
-  Login: {
+import BottomNavigationRoutes from "./BottomNavigationRoutes";
+import DrawerNavigationRoutes from "./DrawerNavigationRoutes";
+
+const StackRoutes = {
+  LOGIN: {
+    name: "Login",
     Component: Login,
     auth: false,
+    header: false,
   },
-  Register: {
+  REGISTER: {
+    name: "Registro",
     Component: Register,
     auth: false,
+    header: true,
   },
-  Home: {
-    Component: Home,
+  REGISTER_SUCCESS: {
+    name: "Registro exitoso",
+    Component: RegisterSuccess,
+    auth: false,
+    header: false,
+  },
+  RECOVER_PASS: {
+    name: "Recuperar contraseña",
+    Component: RecoverPassword,
+    auth: false,
+    header: true,
+  },
+  DRAWER_NAVIGATION: {
+    name: "DRAWER_START",
+    Component: DrawerNavigationRoutes,
     auth: true,
+    header: false,
   },
 };
 
-export default Routes;
+const BottomRoutes = {
+  HOME: {
+    name: "Inicio",
+    Component: Home,
+    auth: true,
+    header: true,
+  },
+};
+
+export { StackRoutes, BottomRoutes };
