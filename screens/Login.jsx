@@ -60,6 +60,7 @@ const Login = ({ navigation }) => {
       contentContainerStyle={[
         GLOBAL.screenContainer,
         GLOBAL.center,
+        GLOBAL.removePadding,
         style.screen,
       ]}
     >
@@ -104,9 +105,7 @@ const Login = ({ navigation }) => {
           >
             <Text style={style.pressable_text}>Olvidé mi contraseña</Text>
           </Pressable>
-          <Pressable
-            onPress={() => navigation.navigate(screensNames.REGISTER)}
-          >
+          <Pressable onPress={() => navigation.navigate(screensNames.REGISTER)}>
             <Text style={style.pressable_text}>
               No tienes cuenta con nosotros? Regístrate!
             </Text>
@@ -126,9 +125,9 @@ const Login = ({ navigation }) => {
 
 const style = StyleSheet.create({
   screen: {
+    flexGrow: 1,
     justifyContent: "space-between",
     paddingBottom: 0,
-    minHeight: height,
   },
   logo_container: {
     height: "auto",

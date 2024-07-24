@@ -249,7 +249,7 @@ const style = StyleSheet.create({
     fontSize: 12,
   },
   scroll_view: {
-    minHeight: height,
+    alignItems: "center",
     paddingVertical: 35,
     paddingHorizontal: 35,
   },

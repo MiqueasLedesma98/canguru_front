@@ -11,7 +11,7 @@ const COLOR = {
   yellow: "#F3CD03",
   bgWarning: "#FEEBDD",
   textWarning: "#FEEBDD",
-  gray: "#333",
+  gray: "#E5E5E5",
 };
 
 const FONT = {
@@ -27,15 +27,19 @@ const FONT = {
 
 const GLOBAL = StyleSheet.create({
   screenContainer: {
-    flex: 1,
+    // flex: 1,
     padding: 16,
     width,
-    height,
     backgroundColor: COLOR.appBackground,
+    minHeight: height,
   },
   center: {
     justifyContent: "center",
     alignItems: "center",
+  },
+  row: {
+    flexDirection: "row",
+    gap: 5,
   },
   space: {
     flex: 1,
