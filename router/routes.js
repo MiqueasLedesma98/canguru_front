@@ -42,13 +42,4 @@ const StackRoutes = {
   },
 };
 
-const BottomRoutes = {
-  HOME: {
-    name: "Inicio",
-    Component: Home,
-    auth: true,
-    header: true,
-  },
-};
-
-export { StackRoutes, BottomRoutes };
+export { StackRoutes };

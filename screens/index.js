@@ -1,5 +1,10 @@
+export { default as BookingClient } from "./BookingsClient";
+export { default as BookingProvider } from "./BookingProvider";
 export { default as Home } from "./Home";
 export { default as Login } from "./Login";
+export { default as Profile } from "./Profile";
+export { default as RecoverPassword } from "./RecoverPassword";
 export { default as Register } from "./Register";
 export { default as RegisterSuccess } from "./RegisterSuccess";
-export { default as RecoverPassword } from "./RecoverPassword";
+export { default as Settings } from "./Settings";
+export { default as Shop } from "./Shop";

@@ -1,13 +1,20 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { MainHeader, CustomDrawerContent } from "../components";
-import { Home } from "../screens";
 import { useAuthStore } from "../stores";
+import BottomNavigationRoutes from "./BottomNavigationRoutes";
+import { Settings } from "../screens";
 
 const DrawerRoutes = {
   HOME: {
     name: "Inicio",
-    Component: Home,
+    Component: BottomNavigationRoutes,
+    auth: true,
+    header: true,
+  },
+  SETTINGS: {
+    name: "Configuración",
+    Component: Settings,
     auth: true,
     header: true,
   },

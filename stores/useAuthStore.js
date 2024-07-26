@@ -7,6 +7,10 @@ const useAuthStore = create((set) => ({
   userInfo: null,
   login: async (form) => {
     const { token, user } = await api.POST(`/auth/login`, form);
+    if (!token || !user) {
+      set({ auth: false, token: null, userInfo: null });
+      return;
+    }
     set({ auth: true, token, userInfo: user });
     await api.setToken(token, user);
   },
