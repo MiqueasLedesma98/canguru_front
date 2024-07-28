@@ -3,16 +3,26 @@ import { getHeaderTitle } from "@react-navigation/elements";
 import { DrawerActions } from "@react-navigation/native";
 import { Image, StyleSheet, View } from "react-native";
 import { COLOR, FONT, GLOBAL } from "../global_styles";
+import { useStateStore } from "../stores";
 
 export default function MainHeader({ navigation, route, options, back }) {
   const title = getHeaderTitle(options, route.name);
+  const mode = useStateStore((state) => state.mode);
 
   return (
-    <Appbar.Header style={style.container}>
+    <Appbar.Header
+      style={[
+        style.container,
+        { backgroundColor: mode ? COLOR.primary : COLOR.secondary },
+      ]}
+    >
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Image source={require("../assets/Logo.png")} style={style.image} />
       <View style={GLOBAL.space} />
-      <Appbar.Content title={title} titleStyle={style.title} />
+      <Appbar.Content
+        title={title}
+        titleStyle={[style.title, { color: COLOR.appBackground }]}
+      />
       <View style={GLOBAL.space} />
       <Appbar.Action
         icon={"menu"}
@@ -29,7 +39,6 @@ const style = StyleSheet.create({
     backgroundColor: COLOR.primary,
   },
   title: {
-    color: COLOR.appBackground,
     fontSize: FONT.giant,
     alignSelf: "center",
     fontFamily: "Neucha",

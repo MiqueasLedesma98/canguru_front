@@ -6,6 +6,7 @@ const screensNames = {
   DRAWER_NAVIGATION: "DRAWER_START",
   RECOVER_PASS: "Recuperar contraseña",
   HOME: "Inicio",
+  DETAILS: "Espacio",
 };
 
 export default screensNames;

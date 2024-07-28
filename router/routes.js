@@ -1,12 +1,11 @@
 import {
   Login,
   Register,
-  Home,
   RegisterSuccess,
   RecoverPassword,
+  Details,
 } from "../screens";
 
-import BottomNavigationRoutes from "./BottomNavigationRoutes";
 import DrawerNavigationRoutes from "./DrawerNavigationRoutes";
 
 const StackRoutes = {
@@ -39,6 +38,12 @@ const StackRoutes = {
     Component: DrawerNavigationRoutes,
     auth: true,
     header: false,
+  },
+  DETAILS: {
+    name: "Espacio",
+    Component: Details,
+    auth: true,
+    header: true,
   },
 };
 

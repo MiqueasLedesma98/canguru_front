@@ -10,8 +10,9 @@ const COLOR = {
   blue: "#2A7DB9",
   yellow: "#F3CD03",
   bgWarning: "#FEEBDD",
-  textWarning: "#FEEBDD",
+  textWarning: "#D07D42",
   gray: "#E5E5E5",
+  secondaryGray: "#979797",
 };
 
 const FONT = {
@@ -27,7 +28,6 @@ const FONT = {
 
 const GLOBAL = StyleSheet.create({
   screenContainer: {
-    // flex: 1,
     padding: 16,
     width,
     backgroundColor: COLOR.appBackground,

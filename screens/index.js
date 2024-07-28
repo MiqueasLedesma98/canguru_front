@@ -8,3 +8,5 @@ export { default as Register } from "./Register";
 export { default as RegisterSuccess } from "./RegisterSuccess";
 export { default as Settings } from "./Settings";
 export { default as Shop } from "./Shop";
+export { default as Details } from "./Details";
+export { default as DetailsService } from "./DetailsService";

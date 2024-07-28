@@ -1,5 +1,12 @@
-export { default as LoadingModal } from "./LoadingModal";
-export { default as ModalCustom } from "./ModalCustom";
-export { default as MainHeader } from "./MainHeader";
+export { default as Categories } from "./Categories";
 export { default as CustomDrawerContent } from "./CustomDrawerContent";
 export { default as FeaturedAccommodationCard } from "./FeaturedAccommodationCard";
+export { default as FeaturedAccomodationList } from "./FeaturedAccomodationList";
+export { default as LoadingModal } from "./LoadingModal";
+export { default as MainHeader } from "./MainHeader";
+export { default as ModalCustom } from "./ModalCustom";
+export { default as ModeSelector } from "./ModeSelector";
+export { default as SearchServices } from "./SearchServices";
+export { default as SearchSpaces } from "./SearchSpaces";
+export { default as Veterinarians } from "./Veterinarians";
+export { default as VeterinariansCard } from "./VeterinariansCard";
